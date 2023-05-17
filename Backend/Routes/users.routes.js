@@ -21,7 +21,8 @@ userRouter.post("/users/login", async (req, res) => {
     if (token === "") {
       res.status(500).send("Wrong Creds!");
     } else {
-      res.send("Logged in : ", token);
+      console.log("token:",token)
+      res.send(token);
     }
   } catch (error) {
     res.status(500).send(error.message);
