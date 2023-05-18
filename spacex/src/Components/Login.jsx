@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -16,10 +17,17 @@ export const Login = () => {
                 password,
             });
 
-            // Handle successful login, e.g., store token in local storage
+            // Store the token in local storage
+            localStorage.setItem('token', response.data);
+
+            // Handle successful login
             console.log('Login successful', response.data);
+
+            // Navigate to /capsule route
+            navigate('/capsule');
         } catch (error) {
-            setError(error.response.data.message);
+            console.log(error.response.data.data)
+            setError(error.response.data.data);
         }
     };
 

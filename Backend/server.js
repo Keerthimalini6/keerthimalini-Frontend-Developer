@@ -3,7 +3,8 @@ const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 const CONNECT = require("./Configs/connection");
-const userRouter = require("./Routes/users.routes")
+const userRouter = require("./Routes/users.routes");
+const capsuleRouter = require("./Routes/capsule.route");
 const app = express();
 
 // USE_
@@ -11,6 +12,7 @@ app.use(express.json());
 app.use(cors());
 app.use(morgan("tiny"));
 app.use(userRouter);
+app.use(capsuleRouter)
 
 // LOGIC_
 app.get("/", (req, res) => {

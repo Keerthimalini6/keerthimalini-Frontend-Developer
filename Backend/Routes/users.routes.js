@@ -18,14 +18,14 @@ userRouter.post("/users/login", async (req, res) => {
   try {
     let token = await login(req.body);
 
-    if (token === "") {
-      res.status(500).send("Wrong Creds!");
+    if (token === undefined) {
+      res.status(500).json({ data: "Invaid Email ID or Password!" }); 
     } else {
-      console.log("token:",token)
-      res.send(token);
+      console.log("token:", token);
+      res.json(token);
     }
   } catch (error) {
-    res.status(500).send(error.message);
+    res.status(500).json({ data: error.message }); 
   }
 });
 
