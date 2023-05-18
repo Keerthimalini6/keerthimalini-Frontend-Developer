@@ -63,28 +63,30 @@ export const Capsule = () => {
                 <h2 style={{ fontSize: "85px", textAlign: 'center', fontWeight: "700", paddingTop: "170px" }}>DRAGON</h2>
                 <p style={{ textAlign: 'center', }}>SENDING HUMANS AND CARGO INTO SPACE</p>
             </div>
-            <ScrollTrigger onEnter={() => setCouter(true)} onExit={() => setCouter(false)}>
-                <div style={{ display: "flex", justifyContent: "space-around" }} >
-                    <div className="counter" style={{ color: "white", display: "flex", flexDirection: "column", alignItems: "center" }}>
-                        <h1 style={{ color: "#767676" }}>
-                            {counter && <CountUp style={{ fontSize: "50px", fontWeight: "400" }} start={0} end={39} duration={8} delay={0} />}
-                        </h1>
-                        <span style={{ fontSize: "1.2rem" }}>TOTAL LAUNCHES</span>
+            <div>
+                <ScrollTrigger onEnter={() => setCouter(true)} onExit={() => setCouter(false)}>
+                    <div style={{ display: "flex", justifyContent: "space-around" }} >
+                        <div className="counter" style={{ color: "white", display: "flex", flexDirection: "column", alignItems: "center" }}>
+                            <h1>
+                                {counter && <CountUp style={{ fontSize: "60px", fontWeight: "700" }} start={0} end={39} duration={5} delay={0} />}
+                            </h1>
+                            <span style={{ fontSize: "1.2rem" }}>TOTAL LAUNCHES</span>
+                        </div>
+                        <div className="counter" style={{ color: "white", display: "flex", flexDirection: "column", alignItems: "center" }}>
+                            <h1>
+                                {counter && <CountUp style={{ fontSize: "60px", fontWeight: "700" }} start={0} end={35} duration={5} delay={0} />}
+                            </h1>
+                            <span style={{ fontSize: "1.2rem" }}> VISITS TO THE ISS</span>
+                        </div>
+                        <div className="counter" style={{ color: "white", display: "flex", flexDirection: "column", alignItems: "center" }}>
+                            <h1>
+                                {counter && <CountUp style={{ fontSize: "60px", fontWeight: "700" }} start={0} end={17} duration={5} delay={0} />}
+                            </h1>
+                            <span style={{ fontSize: "1.2rem" }}>TOTAL REFLIGHTS</span>
+                        </div>
                     </div>
-                    <div className="counter" style={{ color: "white", display: "flex", flexDirection: "column", alignItems: "center" }}>
-                        <h1 style={{ color: "#767676" }}>
-                            {counter && <CountUp style={{ fontSize: "50px", fontWeight: "400" }} start={0} end={35} duration={8} delay={0} />}
-                        </h1>
-                        <span style={{ fontSize: "1.2rem" }}> VISITS TO THE ISS</span>
-                    </div>
-                    <div className="counter" style={{ color: "white", display: "flex", flexDirection: "column", alignItems: "center" }}>
-                        <h1 style={{ color: "#767676" }}>
-                            {counter && <CountUp style={{ fontSize: "50px", fontWeight: "400" }} start={0} end={17} duration={8} delay={0} />}
-                        </h1>
-                        <span style={{ fontSize: "1.2rem" }}>TOTAL REFLIGHTS</span>
-                    </div>
-                </div>
-            </ScrollTrigger >
+                </ScrollTrigger >
+            </div>
             <div style={{ backgroundImage: 'url(https://www.spacex.com/static/images/dragon/desktop/DragonTrunk_Render_Desktop.jpg)', backgroundSize: 'cover', backgroundPosition: 'center', minHeight: '100vh' }}>
                 <div style={{ paddingTop: "70px" }}>
                     <form onSubmit={handleSubmit} className="space-y-4 w-1/2 text-left mx-3 ">
@@ -150,7 +152,7 @@ export const Capsule = () => {
                         <h3 className="text-lg font-bold mb-4">Results</h3>
                         <div className="grid grid-cols-2 gap-4 w-1/2 text-left">
                             {currentItems.map((ele, id) => (
-                                <div key={id} style={{ borderColor: "#767676" }} className="border p-4 rounded">
+                                <div key={id} style={{ borderColor: "#767676" }} className=" border p-4 rounded bubble">
                                     <p className="font-bold" style={{ textTransform: "uppercase" }}>{ele.capsule_id} - {ele.capsule_serial}</p>
                                     <p>{ele.details}</p>
                                     <p>Original launch : <span style={{ color: "#767676" }}>{ele.original_launch}</span></p>

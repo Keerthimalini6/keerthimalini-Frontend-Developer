@@ -6,3 +6,14 @@
 .logo{
     width: 300px;
 }
+@keyframes bubble {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0); }
+  }
+  
+  .bubble:hover {
+    animation: bubble 0.5s ease-in-out infinite; /* Added 'infinite' to make the animation continuous */
+  }
+  
+  
