@@ -4,6 +4,16 @@ import logo from "../Images/logo.svg"
 import "../Styles/capsule.css"
 import CountUp from "react-countup";
 import ScrollTrigger from "react-scroll-trigger";
+import {
+    Modal,
+    ModalContent,
+    ModalHeader,
+    ModalFooter,
+    ModalBody,
+    ModalCloseButton,
+    useDisclosure,
+    Button,
+} from '@chakra-ui/react'
 
 export const Capsule = () => {
     const [status, setStatus] = useState('');
@@ -13,6 +23,7 @@ export const Capsule = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(6);
     const [counter, setCouter] = useState(false)
+    const { isOpen, onOpen, onClose } = useDisclosure()
 
     const fetchData = async () => {
         try {
@@ -51,7 +62,7 @@ export const Capsule = () => {
     return (
         <div style={{ color: 'white', backgroundColor: "black" }} >
             <div style={{ backgroundImage: 'url(https://www.spacex.com/static/images/backgrounds/dragon_feature.jpg)', backgroundSize: 'cover', backgroundPosition: 'center', minHeight: '100vh' }}>
-                <div style={{ padding: "10px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                <div style={{ padding: "20px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                     <img src={logo} alt="" className='logo' />
                     <p className='nav-p'>Falcon</p>
                     <p className='nav-p'>Falcon Heavy</p>
@@ -101,6 +112,9 @@ export const Capsule = () => {
                                 className="border border-white rounded px-4 py-2 w-full bg-black text-white"
                                 style={{ color: 'white' }}
                             >
+                                <option value="" style={{ backgroundColor: 'black', color: 'white' }}>
+                                    Select the status
+                                </option>
                                 <option value="active" style={{ backgroundColor: 'black', color: 'white' }}>
                                     Active
                                 </option>
@@ -131,13 +145,26 @@ export const Capsule = () => {
                             <label htmlFor="type" className="block mb-2 font-medium">
                                 Type:
                             </label>
-                            <input
-                                type="text"
+                            <select
                                 id="type"
                                 value={type}
                                 onChange={(e) => setType(e.target.value)}
                                 className="border border-white rounded px-4 py-2 w-full bg-black text-white"
-                            />
+                                style={{ color: 'white' }}
+                            >
+                                <option value="" style={{ backgroundColor: 'black', color: 'white' }}>
+                                    Select a type
+                                </option>
+                                <option value="Dragon 1.0" style={{ backgroundColor: 'black', color: 'white' }}>
+                                    Dragon 1.0
+                                </option>
+                                <option value="Dragon 1.1" style={{ backgroundColor: 'black', color: 'white' }}>
+                                    Dragon 1.1
+                                </option>
+                                <option value="Dragon 2.0" style={{ backgroundColor: 'black', color: 'white' }}>
+                                    Dragon 2.0
+                                </option>
+                            </select>
                         </div>
                         <button
                             type="submit"
@@ -152,29 +179,46 @@ export const Capsule = () => {
                         <h3 className="text-lg font-bold mb-4">Results</h3>
                         <div className="grid grid-cols-2 gap-4 w-1/2 text-left">
                             {currentItems.map((ele, id) => (
-                                <div key={id} style={{ borderColor: "#767676" }} className=" border p-4 rounded bubble">
+                                <div key={id} style={{ borderColor: "#767676" }} className=" border p-4 rounded bubble" onClick={onOpen}>
                                     <p className="font-bold" style={{ textTransform: "uppercase" }}>{ele.capsule_id} - {ele.capsule_serial}</p>
                                     <p>{ele.details}</p>
-                                    <p>Original launch : <span style={{ color: "#767676" }}>{ele.original_launch}</span></p>
-                                    <p>Status : <span style={{ color: "#767676" }}>{ele.status}</span></p>
-                                    <p>Type : <span style={{ color: "#767676" }}>{ele.type}</span></p>
-                                    {ele.missions.length !== 0 ? <div><p>Missions : <span style={{ color: "#767676" }}>{ele.missions[0].name}</span></p>
-                                        <p>Flight : <span style={{ color: "#767676" }}>{ele.missions[0].flight}</span></p></div> : ""}
 
+                                    <Modal isOpen={isOpen} onClose={onClose} isCentered>
+                                        <ModalContent>
+                                            <ModalHeader style={{ textTransform: "uppercase" }}>{ele.capsule_id}</ModalHeader>
+                                            <ModalCloseButton />
+                                            <ModalBody>
+                                                <p>Original launch : <span style={{ color: "#767676" }}>{ele.original_launch}</span></p>
+                                                <p>Status : <span style={{ color: "#767676" }}>{ele.status}</span></p>
+                                                <p>Type : <span style={{ color: "#767676" }}>{ele.type}</span></p>
+                                                {ele.missions.length === 0 ? " " : <div>
+                                                    <p>Missions : <span style={{ color: "#767676" }}>{ele.missions[0].name}</span></p>
+                                                    <p>Flight : <span style={{ color: "#767676" }}>{ele.missions[0].flight}</span></p>
+                                                </div>}
+                                            </ModalBody>
+
+                                            <ModalFooter>
+                                                <Button backgroundColor="#2c2d31" color="white" mr={3} onClick={onClose}>
+                                                    Close
+                                                </Button>
+                                            </ModalFooter>
+                                        </ModalContent>
+                                    </Modal>
                                 </div>
+
                             ))}
                         </div>
                         {/* Pagination */}
-                        <div className="flex justify-center mt-4 w-1/2 text-left">
+                        <div style={{ paddingBottom: "30px" }} className="flex justify-center mt-4 w-1/2 text-left">
                             {Array.from({ length: Math.ceil(capsuleData.length / itemsPerPage) }).map((_, index) => (
-                                <button
+                                <Button
                                     key={index}
                                     onClick={() => paginate(index + 1)}
-                                    className={` border border-white mx-1 px-2 py-1 rounded ${currentPage === index + 1 ? "bg-black-500 text-white" : "bg-gray-300 text-gray-700"
-                                        }`}
+                                    backgroundColor={currentPage === index + 1 ? "#19191b" : "gray"}
+                                    className={`  mx-1 px-2 py-1 rounded`}
                                 >
                                     {index + 1}
-                                </button>
+                                </Button>
                             ))}
                         </div>
                     </div>

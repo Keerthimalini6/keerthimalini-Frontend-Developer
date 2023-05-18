@@ -10,10 +10,12 @@ import {
   Route,
 } from "react-router-dom";
 import { Capsule } from './Components/Capsule';
+import { ChakraProvider } from '@chakra-ui/react';
 
 function App() {
   return (
     <div className="App">
+      <ChakraProvider>
       <BrowserRouter>
         <Routes>
             <Route path="/" element={<Login/>} />
@@ -21,6 +23,7 @@ function App() {
             <Route path="/capsule" element={<Capsule/>} />
         </Routes>
       </BrowserRouter>
+      </ChakraProvider>
     </div>
   );
 }
