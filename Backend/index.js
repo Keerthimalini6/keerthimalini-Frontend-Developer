@@ -25,4 +25,6 @@ CONNECT().then(() => {
   app.listen(PORT, () => {
     console.log("Server started at :", PORT);
   });
-});
+}).catch((err)=>{
+  console.log(err)
+})
