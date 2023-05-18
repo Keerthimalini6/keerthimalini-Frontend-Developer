@@ -13,7 +13,7 @@ export const Signup = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('http://localhost:8080/users/register', {
+            const response = await axios.post('https://backend-spacex.vercel.app/users/register', {
                 name, // Add name to the request body
                 email,
                 password,

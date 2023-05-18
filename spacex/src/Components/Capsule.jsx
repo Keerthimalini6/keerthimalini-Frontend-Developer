@@ -21,7 +21,7 @@ export const Capsule = () => {
                 original_launch: originalLaunch,
                 type,
             };
-            const response = await axios.get('http://localhost:8080/capsule', {
+            const response = await axios.get('https://backend-spacex.vercel.app/capsule', {
                 params: queryParams,
             });
 
