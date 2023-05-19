@@ -71,29 +71,29 @@ export const Capsule = () => {
                     <p className='nav-p'>Rideshare</p>
                     <p className='nav-p'>Starshield</p>
                 </div>
-                <h2 style={{ fontSize: "85px", textAlign: 'center', fontWeight: "700", paddingTop: "170px" }}>DRAGON</h2>
+                <h2 className='dragon-p'>DRAGON</h2>
                 <p style={{ textAlign: 'center', }}>SENDING HUMANS AND CARGO INTO SPACE</p>
             </div>
             <div>
                 <ScrollTrigger onEnter={() => setCouter(true)} onExit={() => setCouter(false)}>
                     <div style={{ display: "flex", justifyContent: "space-around" }} >
-                        <div className="counter" style={{ color: "white", display: "flex", flexDirection: "column", alignItems: "center" }}>
+                        <div className='counter-div'>
                             <h1>
-                                {counter && <CountUp style={{ fontSize: "60px", fontWeight: "700" }} start={0} end={39} duration={5} delay={0} />}
+                                {counter && <CountUp className='counter' start={0} end={39} duration={5} delay={0} />}
                             </h1>
-                            <span style={{ fontSize: "1.2rem" }}>TOTAL LAUNCHES</span>
+                            <span className='counter-text'>TOTAL LAUNCHES</span>
                         </div>
-                        <div className="counter" style={{ color: "white", display: "flex", flexDirection: "column", alignItems: "center" }}>
+                        <div className='counter-div'>
                             <h1>
-                                {counter && <CountUp style={{ fontSize: "60px", fontWeight: "700" }} start={0} end={35} duration={5} delay={0} />}
+                                {counter && <CountUp className='counter' start={0} end={35} duration={5} delay={0} />}
                             </h1>
-                            <span style={{ fontSize: "1.2rem" }}> VISITS TO THE ISS</span>
+                            <span className='counter-text'> VISITS TO THE ISS</span>
                         </div>
-                        <div className="counter" style={{ color: "white", display: "flex", flexDirection: "column", alignItems: "center" }}>
+                        <div className='counter-div'>
                             <h1>
-                                {counter && <CountUp style={{ fontSize: "60px", fontWeight: "700" }} start={0} end={17} duration={5} delay={0} />}
+                                {counter && <CountUp className='counter' start={0} end={17} duration={5} delay={0} />}
                             </h1>
-                            <span style={{ fontSize: "1.2rem" }}>TOTAL REFLIGHTS</span>
+                            <span className='counter-text'>TOTAL REFLIGHTS</span>
                         </div>
                     </div>
                 </ScrollTrigger >

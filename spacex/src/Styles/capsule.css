@@ -6,14 +6,56 @@
 .logo{
     width: 300px;
 }
+.dragon-p{
+  font-size: 85px;
+  text-align: center;
+  font-weight: 700;
+  padding-top: 170px;
+}
+.counter{
+  font-size: 60px;
+  font-weight: 700;
+}
+.counter-div{
+color: white;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+}
+.counter-text{
+  font-size: 1.2rem;
+}
 @keyframes bubble {
     0% { transform: translateY(0); }
     50% { transform: translateY(-15px); }
     100% { transform: translateY(0); }
-  }
+}
   
-  .bubble:hover {
-    animation: bubble 0.5s ease-in-out infinite; /* Added 'infinite' to make the animation continuous */
-  }
+.bubble:hover {
+  animation: bubble 0.5s ease-in-out infinite; /* Added 'infinite' to make the animation continuous */
+}
   
-  
+@media (max-width:760px){
+.nav-p{
+    display: none;
+}
+.dragon-p{
+  font-size: 65px;
+  font-weight: 500;
+}
+.counter{
+  font-size: 40px;
+  font-weight: 500;
+}
+.counter-div{
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+}
+.counter-text{
+  font-size: 1rem;
+  padding-left: 10px;
+}
+}
+
