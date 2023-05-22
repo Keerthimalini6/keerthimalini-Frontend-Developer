@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import logo from "../Images/logo.svg"
 import "../Styles/capsule.css"
@@ -29,21 +29,23 @@ export const Capsule = () => {
         try {
             const queryParams = {
                 status,
-                original_launch: originalLaunch,
                 type,
             };
             const response = await axios.get('https://backend-spacex.vercel.app/capsule', {
                 params: queryParams,
             });
 
-            console.log('Capsule data:', response.data);
             setCapsuleData(response.data);
             setStatus("")
-            setOriginalLaunch("")
             setType("")
         } catch (error) {
             console.error('Error fetching capsule data:', error);
         }
+    };
+
+    const handleOriginalLaunchChange = (e) => {
+        var selectedYear = e.target.value;
+        setOriginalLaunch(selectedYear);
     };
 
     const handleSubmit = (e) => {
@@ -51,6 +53,18 @@ export const Capsule = () => {
         setCurrentPage(1);
         fetchData();
     };
+
+    useEffect(() => {
+        if (originalLaunch !== '') {
+            const filteredData = capsuleData.filter(
+                (event) => new Date(event.original_launch).getFullYear().toString() > originalLaunch
+            );
+
+            setCapsuleData(filteredData ? filteredData : null);
+            setOriginalLaunch("")
+        } console.log(capsuleData)
+    }, [capsuleData])
+
     // Pagination logic
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -133,13 +147,26 @@ export const Capsule = () => {
                             <label htmlFor="originalLaunch" className="block mb-2 font-medium">
                                 Original Launch:
                             </label>
-                            <input
-                                type="text"
-                                id="originalLaunch"
+                            <select
+                                id="originallaunch"
                                 value={originalLaunch}
-                                onChange={(e) => setOriginalLaunch(e.target.value)}
+                                onChange={handleOriginalLaunchChange}
                                 className="border border-white rounded px-4 py-2 w-full bg-black text-white"
-                            />
+                                style={{ color: 'white' }}
+                            >
+                                <option value="" style={{ backgroundColor: 'black', color: 'white' }}>
+                                    Select a originalLaunch
+                                </option>
+                                <option value="2010" style={{ backgroundColor: 'black', color: 'white' }}>
+                                    2010
+                                </option>
+                                <option value="2015" style={{ backgroundColor: 'black', color: 'white' }}>
+                                    2015
+                                </option>
+                                <option value="2018" style={{ backgroundColor: 'black', color: 'white' }}>
+                                    2018
+                                </option>
+                            </select>
                         </div>
                         <div>
                             <label htmlFor="type" className="block mb-2 font-medium">
